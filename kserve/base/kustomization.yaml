@@ -8,6 +8,7 @@ namespace: opendatahub
 patches:
   - path: kserve-controller-manager-patch.yaml
   - path: inferenceservice-config-patch.yaml
+  - path: kserve-queue-proxy-ext-patch.yaml
 
 configMapGenerator:
 - envs:
@@ -46,6 +47,14 @@ vars:
     apiVersion: v1
     kind: ConfigMap
     name: kserve-parameters
+- fieldref:
+    fieldpath: data.kserve-ext
+  name: kserve-ext
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kserve-parameters
+
 
 configurations:
   - params.yaml
